@@ -41,41 +41,59 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  // 1️⃣ Fetch direct referrals
+  // Initialize earnings and counters
+  let directEarnings = 0;
+  let indirectEarnings = 0;
+  let directCount = 0;
+  let indirectCount = 0;
+
+  // 1️⃣ Fetch direct referrals who have purchased a plan
   const { data: directReferrals, error: directError } = await supabaseClient
     .from("profiles")
-    .select("id, referral_code")
-    .eq("referral_code_used", referralCode);
+    .select("id, referral_code, plan_name")
+    .eq("referral_code_used", referralCode)
+    .not("plan_name", "is", null);
 
   if (directError) {
     console.error("Failed to load direct referrals:", directError);
     return;
   }
 
-  const perDirect = (selectedPlan.price * selectedPlan.direct) / 100;
-  const directCount = directReferrals.length;
-  let directEarnings = directCount * perDirect;
+  directCount = directReferrals.length;
 
-  // 2️⃣ Fetch indirect referrals
-  let indirectCount = 0;
-  let indirectEarnings = 0;
+  // ➕ Calculate direct earnings
+  for (const direct of directReferrals) {
+    const referredPlan = plans[direct.plan_name];
+    if (referredPlan) {
+      const earning = (referredPlan.price * selectedPlan.direct) / 100;
+      directEarnings += earning;
+    }
+  }
 
+  // 2️⃣ Fetch indirect referrals for each direct user
   for (const direct of directReferrals) {
     const { data: indirects, error: indirectError } = await supabaseClient
       .from("profiles")
-      .select("id")
-      .eq("referral_code_used", direct.referral_code);
+      .select("plan_name")
+      .eq("referral_code_used", direct.referral_code)
+      .not("plan_name", "is", null);
 
-    if (!indirectError && indirects.length > 0) {
-      indirectCount += indirects.length;
-      const perIndirect = (selectedPlan.price * selectedPlan.indirect) / 100;
-      indirectEarnings += indirects.length * perIndirect;
+    if (indirectError) continue;
+
+    for (const indirect of indirects) {
+      const indirectPlan = plans[indirect.plan_name];
+      if (indirectPlan) {
+        const earning = (indirectPlan.price * selectedPlan.indirect) / 100;
+        indirectEarnings += earning;
+      }
     }
+
+    indirectCount += indirects.length;
   }
 
   const totalEarnings = directEarnings + indirectEarnings;
 
-  // 3️⃣ Update wallet balance (optional: reset weekly manually via Supabase UI)
+  // 3️⃣ Update wallet balance (can be reset weekly via Supabase UI)
   await supabaseClient
     .from("profiles")
     .update({ wallet_balance: totalEarnings })
