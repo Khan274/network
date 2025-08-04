@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   const referralCode = profile.referral_code || "UNKNOWN";
-  const referralLink = `https://ibsland.com/pages/sign-up.html?ref=${referralCode}`;
+  const referralLink = `https://ubuilderspk.com/pages/sign-up.html?ref=${referralCode}`;
 
   // Inject values into the DOM
   document.getElementById("referral-code").textContent = referralCode;
