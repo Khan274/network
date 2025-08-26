@@ -1,4 +1,4 @@
-/********** Template CSS **********/
+/********** CSS **********/
 :root {
     --primary: #4294E3;
     --secondary: #8F12FD;
@@ -500,3 +500,34 @@ h6,
     padding-right: 0;
     border-right: none;
 }
+
+/* Floating WhatsApp Button */
+#whatsapp-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25d366; /* WhatsApp green */
+  color: #fff;
+  font-size: 28px;
+  padding: 15px;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  z-index: 9999;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+#whatsapp-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+  color: #fff;
+}
+
+#whatsapp-btn {
+  display: block !important;   /* force always visible */
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+
+
