@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Load current user's profile
   const { data: profile, error: profileError } = await supabaseClient
     .from("profiles")
-    .select("plan_name, referral_code, wallet_balance")
+    .select("plan_name, referral_code, wallet_balance, total_earnings")
     .eq("id", userId)
     .single();
 
@@ -93,16 +93,18 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const totalEarnings = directEarnings + indirectEarnings;
 
-  // 3️⃣ Update wallet balance (can be reset weekly via Supabase UI)
+  // 3️⃣ Update only total_earnings (lifetime tracker)
   await supabaseClient
     .from("profiles")
-    .update({ wallet_balance: totalEarnings })
+    .update({ total_earnings: totalEarnings })
     .eq("id", userId);
+
+  // ⚡ wallet_balance will stay as stored in DB (manual reset possible)
 
   // 4️⃣ Update UI
   document.getElementById("plan-name").textContent = userPlan || "Not Set";
   document.getElementById("total-invites").textContent = directCount + indirectCount;
-  document.getElementById("wallet-balance").textContent = `PKR ${totalEarnings.toFixed(0)}`;
+  document.getElementById("wallet-balance").textContent = `PKR ${profile.wallet_balance?.toFixed(0) || 0}`;
   document.getElementById("total-earnings").textContent = `PKR ${totalEarnings.toFixed(0)}`;
 
   const directElem = document.getElementById("direct-invites");
