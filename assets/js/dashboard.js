@@ -103,9 +103,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // 4️⃣ Update UI
   document.getElementById("plan-name").textContent = userPlan || "Not Set";
-  document.getElementById("total-invites").textContent = directCount + indirectCount;
-  document.getElementById("wallet-balance").textContent = `PKR ${profile.wallet_balance?.toFixed(0) || 0}`;
-  document.getElementById("total-earnings").textContent = `PKR ${totalEarnings.toFixed(0)}`;
+  document.getElementById("total-invites").textContent = directCount + indirectCount
+  document.getElementById("wallet-balance").textContent = `PKR ${profile.wallet_balance.toLocaleString()}`;
+  document.getElementById("total-earnings").textContent = `PKR ${totalEarnings.toLocaleString()}`;
 
   const directElem = document.getElementById("direct-invites");
   if (directElem) directElem.textContent = `Direct Invites: ${directCount}`;
