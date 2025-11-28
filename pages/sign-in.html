@@ -1,206 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Login to your account">
+    <title>Login | Welcome Back</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="auth-background">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
 
-    <title>Login | U-Network</title>
-    
-    <!-- Favicon -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-icon.png" rel="icon"/>
-    
-    <!-- Fonts and icons -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
-      rel="stylesheet" />
-    <!-- Font Awesome Icons -->
-    <script
-      src="https://kit.fontawesome.com/42d5adcbca.js"
-      crossorigin="anonymous"></script>
-    <!-- Nucleo Icons -->
-    <link href="assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
-    <!-- Main Styling -->
-    <link
-      href="assets/css/soft-ui-dashboard-tailwind.css?v=1.0.5"
-      rel="stylesheet" />
-  </head>
-
-  <body
-    class="m-0 font-sans antialiased font-normal bg-white text-start text-base leading-default text-slate-500">
-    <!-- Navbar -->
-    <nav
-      class="absolute top-0 z-30 flex flex-wrap items-center justify-between w-full px-4 py-2 mt-6 mb-4 shadow-none lg:flex-nowrap lg:justify-start">
-      <div
-        class="container flex items-center justify-between py-0 flex-wrap-inherit">
-        <a
-          class="py-2.375 text-sm mr-4 ml-4 whitespace-nowrap font-bold text-white lg:ml-0"
-          href="pages/dashboard.html">
-          U-Network
-        </a>
-          <!-- online builder btn  -->
-          <!-- <li class="flex items-center">
-            <a
-              class="leading-pro ease-soft-in border-white/75 text-xs tracking-tight-soft rounded-3.5xl hover:border-white/75 hover:scale-102 active:hover:border-white/75 active:hover:scale-102 active:opacity-85 active:shadow-soft-xs active:border-white/75 bg-white/10 hover:bg-white/10 active:hover:bg-white/10 mr-2 mb-0 inline-block cursor-pointer border border-solid py-2 px-8 text-center align-middle font-bold uppercase text-white shadow-none transition-all hover:text-white hover:opacity-75 hover:shadow-none active:scale-100 active:bg-white active:text-black active:hover:text-white active:hover:opacity-75 active:hover:shadow-none"
-              target="_blank"
-              href="https://www.creative-tim.com/builder/soft-ui?ref=navbar-dashboard&amp;_ga=2.76518741.1192788655.1647724933-1242940210.1644448053"
-              >Online Builder</a
-            >
-          </li> -->
-        </div>
-      </div>
-    </nav>
-
-    <main class="mt-0 transition-all duration-200 ease-soft-in-out">
-      <section class="min-h-screen mb-32">
-        <div
-          class="relative flex items-start pt-12 pb-56 m-4 overflow-hidden bg-center bg-cover min-h-50-screen rounded-xl"
-          style="
-            background-image: url('assets/img/curved-images/curved14.jpg');
-          ">
-          <span
-            class="absolute top-0 left-0 w-full h-full bg-center bg-cover bg-gradient-to-tl from-gray-900 to-slate-800 opacity-60"></span>
-          <div class="container z-10">
-            <div class="flex flex-wrap justify-center -mx-3">
-              <div
-                class="w-full max-w-full px-3 mx-auto mt-0 text-center lg:flex-0 shrink-0 lg:w-5/12">
-                <h1 class="mt-12 mb-2 text-white">Welcome Back,</h1>
-                <p class="text-white">
-                  Login to your U-Network account.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="container">
-          <div class="flex flex-wrap -mx-3 -mt-48 md:-mt-56 lg:-mt-48">
-            <div class="w-full max-w-full px-3 mx-auto mt-0 md:flex-0 shrink-0 md:w-7/12 lg:w-5/12 xl:w-4/12">
-              <div class="relative z-0 flex flex-col min-w-0 break-words bg-white border-0 shadow-soft-xl rounded-2xl bg-clip-border">
-                <div class="p-6 mb-0 text-center bg-white border-b-0 rounded-t-2xl">
-                  <h5>Log-in to Your Account</h5>
+    <main class="auth-container">
+        <div class="glass-card login-card">
+            <header class="card-header">
+                <div class="logo-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                        <polyline points="10 17 15 12 10 7"></polyline>
+                        <line x1="15" y1="12" x2="3" y2="12"></line>
+                    </svg>
                 </div>
-                <div class="flex-auto p-6">
-                  <form action="#" method="POST">
-                    <div class="mb-4">
-                      <input type="email" placeholder="Email" required class="text-sm block w-full rounded-lg border border-gray-300 py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500" />
-                    </div>
-                    <div class="mb-4">
-                      <input type="password" placeholder="Password" required class="text-sm block w-full rounded-lg border border-gray-300 py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500" />
-                    </div>
-                      <div class="text-center">
-                        <button
-                          type="submit"
-                          class="inline-block w-full px-6 py-3 mt-6 mb-0 font-bold text-center text-white uppercase align-middle transition-all bg-transparent border-0 rounded-lg cursor-pointer shadow-soft-md bg-x-25 bg-150 leading-pro text-xs ease-soft-in tracking-tight-soft bg-gradient-to-tl from-blue-600 to-cyan-400 hover:scale-102 hover:shadow-soft-xs active:opacity-85">
-                          Log in
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-                  <div
-                    class="p-6 px-1 pt-0 text-center bg-transparent border-t-0 border-t-solid rounded-b-2xl lg:px-2">
-                    <p class="mx-auto mb-6 leading-normal text-sm">
-                      Don't have an account?
-                      <a
-                        href="sign-up.html"
-                        class="relative z-10 font-semibold text-transparent bg-gradient-to-tl from-blue-600 to-cyan-400 bg-clip-text"
-                        >Sign up</a>
-                    </p>
-                  </form>
+                <h1 class="card-title">Welcome back</h1>
+                <p class="card-subtitle">Sign in to continue to your account</p>
+            </header>
+
+            <form id="loginForm" class="auth-form" novalidate>
+                <div class="error-message" id="errorMessage"></div>
+                <div class="success-message" id="successMessage"></div>
+
+                <div class="input-group">
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder=" "
+                        autocomplete="email"
+                        required
+                    >
+                    <label for="email">Email address</label>
+                    <div class="input-highlight"></div>
                 </div>
-              </div>
-            </div>
-          </div>
+
+                <div class="input-group password-group">
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        placeholder=" "
+                        autocomplete="current-password"
+                        required
+                    >
+                    <label for="password">Password</label>
+                    <button type="button" class="password-toggle" aria-label="Toggle password visibility">
+                        <svg class="eye-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                        <svg class="eye-closed" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                            <line x1="1" y1="1" x2="23" y2="23"></line>
+                        </svg>
+                    </button>
+                    <div class="input-highlight"></div>
+                </div>
+
+                <button type="submit" class="btn-submit" id="submitBtn">
+                    <span class="btn-text">Sign in</span>
+                    <span class="btn-loader">
+                        <svg class="spinner" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle>
+                            <path d="M12 2a10 10 0 0 1 10 10" stroke-opacity="1"></path>
+                        </svg>
+                    </span>
+                </button>
+            </form>
+
+            <footer class="card-footer">
+                <p>Don't have an account? <a href="signup.html" class="auth-link">Sign up</a></p>
+            </footer>
         </div>
-      </section>
-      <!-- -------- START FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
-      <footer class="py-12">
-        <div class="container">
-          <div class="flex flex-wrap -mx-3">
-            <div
-              class="flex-shrink-0 w-full max-w-full mx-auto mb-6 text-center lg:flex-0 lg:w-8/12">
-              <a
-                href="https://khan274.github.io/network/"
-                class="mb-2 mr-4 text-slate-400 sm:mb-0 xl:mr-12">
-                Home
-              </a>
-              <a
-                href="https://khan274.github.io/network/#about"
-                class="mb-2 mr-4 text-slate-400 sm:mb-0 xl:mr-12">
-                About Us
-              </a>
-              <a
-                href="https://khan274.github.io/network/#feature"
-                target="_blank"
-                class="mb-2 mr-4 text-slate-400 sm:mb-0 xl:mr-12">
-                Pricing
-              </a>
-              <a
-                href="https://khan274.github.io/network/#contact"
-                class="mb-2 mr-4 text-slate-400 sm:mb-0 xl:mr-12">
-                Contact Us
-              </a>
-            </div>
-            <div
-              class="flex-shrink-0 w-full max-w-full mx-auto mt-2 mb-6 text-center lg:flex-0 lg:w-8/12">
-              <a
-                href="javascript:;"
-                target="_blank"
-                class="mr-6 text-slate-400">
-                <span class="text-lg fab fa-dribbble"></span>
-              </a>
-              <a
-                href="javascript:;"
-                target="_blank"
-                class="mr-6 text-slate-400">
-                <span class="text-lg fab fa-twitter"></span>
-              </a>
-              <a
-                href="javascript:;"
-                target="_blank"
-                class="mr-6 text-slate-400">
-                <span class="text-lg fab fa-instagram"></span>
-              </a>
-              <a
-                href="javascript:;"
-                target="_blank"
-                class="mr-6 text-slate-400">
-                <span class="text-lg fab fa-pinterest"></span>
-              </a>
-              <a
-                href="javascript:;"
-                target="_blank"
-                class="mr-6 text-slate-400">
-                <span class="text-lg fab fa-github"></span>
-              </a>
-            </div>
-          </div>
-          <div class="flex flex-wrap -mx-3">
-            <div class="w-8/12 max-w-full px-3 mx-auto mt-1 text-center flex-0">
-              <p class="mb-0 text-slate-400">
-                Copyright ©
-                <script>
-                  document.write(new Date().getFullYear());
-                </script>
-                U-Netwrok
-              </p>
-            </div>
-          </div>
-        </div>
-      </footer>
-      <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
     </main>
-  </body>
-  <!-- plugin for scrollbar  -->
-  <script src="assets/js/plugins/perfect-scrollbar.min.js" async></script>
-  <!-- main script file  -->
-  <script
-    src="assets/js/soft-ui-dashboard-tailwind.js?v=1.0.5"
-    async></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+    <footer class="minimal-footer">
+        <p>&copy; 2025 U-Network. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="assets/js/log-in.js"></script>
-
-
-
+</body>
 </html>
