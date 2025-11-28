@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            showSuccess("Account created successfully! Redirecting...");
+            showSuccess("Account created successfully!");
             setTimeout(() => {
                 window.location.href = "sign-in.html";
             }, 2000);
