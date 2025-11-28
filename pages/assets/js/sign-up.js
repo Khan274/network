@@ -5,96 +5,159 @@ const { createClient } = supabase;
 const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 document.addEventListener("DOMContentLoaded", function () {
-  const form = document.querySelector("form");
-  if (!form) return;
+    const form = document.getElementById("signupForm");
+    const submitBtn = document.getElementById("submitBtn");
+    const passwordInput = document.getElementById("password");
+    const passwordToggle = document.getElementById("passwordToggle");
+    const errorMessage = document.getElementById("errorMessage");
+    const successMessage = document.getElementById("successMessage");
+    const referralInput = document.getElementById("referral");
 
-  const submitBtn = form.querySelector('button[type="submit"]');
-  const urlParams = new URLSearchParams(window.location.search);
-  const refCodeFromURL = urlParams.get("ref");
-  const referralInput = form.querySelector('input[placeholder*="Referral"]');
+    if (!form) return;
 
-  if (refCodeFromURL && referralInput) {
-    referralInput.value = refCodeFromURL.toUpperCase();
-  }
-
-  form.addEventListener("submit", async function (e) {
-    e.preventDefault();
-
-    const name = form.querySelector('input[placeholder="Full Name"]').value.trim();
-    const phone = form.querySelector('input[placeholder="Phone Number"]').value.trim();
-    const email = form.querySelector('input[placeholder="Email"]').value.trim();
-    const password = form.querySelector('input[placeholder="Password"]').value.trim();
-    const referralCode = referralInput.value.trim() || null;
-
-    if (!name || !email || !phone || !password) {
-      alert("Please fill all required fields.");
-      return;
+    // Prefill referral from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const refCodeFromURL = urlParams.get("ref");
+    if (refCodeFromURL && referralInput) {
+        referralInput.value = refCodeFromURL.toUpperCase();
     }
 
-    submitBtn.disabled = true;
-    submitBtn.innerText = "Signing up...";
-
-    // Sign up with Supabase Auth
-    const { data: authData, error: authError } = await supabaseClient.auth.signUp({
-      email,
-      password,
+    // Password toggle
+    passwordToggle.addEventListener("click", function () {
+        const isPassword = passwordInput.type === "password";
+        passwordInput.type = isPassword ? "text" : "password";
+        this.classList.toggle("active", isPassword);
     });
 
-    if (authError || !authData?.user) {
-      alert("Signup failed: " + (authError?.message || "No user returned."));
-      submitBtn.disabled = false;
-      submitBtn.innerText = "Sign up";
-      return;
+    // Input focus animations
+    const inputs = form.querySelectorAll("input");
+    inputs.forEach((input) => {
+        input.addEventListener("focus", () => input.parentElement.classList.add("focused"));
+        input.addEventListener("blur", () => input.parentElement.classList.remove("focused"));
+    });
+
+    function showError(msg) {
+        errorMessage.textContent = msg;
+        errorMessage.classList.add("show");
+        successMessage.classList.remove("show");
     }
 
-    const user = authData.user;
-    const userId = user.id;
-
-    let referred_by_id = null;
-    let referred_by_grand_id = null;
-
-    if (referralCode) {
-      // Step 1: Find direct referrer by their referral code
-      const { data: refUser, error: refError } = await supabaseClient
-        .from("profiles")
-        .select("id, referred_by_id")
-        .eq("referral_code", referralCode)
-        .single();
-
-      if (!refError && refUser) {
-        referred_by_id = refUser.id;
-        referred_by_grand_id = refUser.referred_by_id || null;
-      } else {
-        console.warn("Invalid referral code or referrer not found.");
-      }
+    function showSuccess(msg) {
+        successMessage.textContent = msg;
+        successMessage.classList.add("show");
+        errorMessage.classList.remove("show");
     }
 
-    // Step 2: Generate a unique referral code for the new user
-    const generatedCode = userId.slice(0, 8).toUpperCase();
-
-    // Step 3: Insert into profiles table
-    const { error: dbError } = await supabaseClient.from("profiles").insert([
-      {
-        id: userId,
-        name,
-        email,
-        phone,
-        referral_code_used: referralCode,
-        referral_code: generatedCode,
-        referred_by_id,
-        referred_by_grand_id,
-        wallet_balance: 0,
-        created_at: new Date().toISOString(),
-      },
-    ]);
-
-    if (dbError) {
-      alert("User created, but failed to save profile: " + dbError.message);
-      submitBtn.disabled = false;
-      submitBtn.innerText = "Sign up";
-    } else {
-      alert("Account created successfully!");
-      window.location.href = "sign-in.html";
+    function hideMessages() {
+        errorMessage.classList.remove("show");
+        successMessage.classList.remove("show");
     }
-  });
+
+    function setLoading(loading) {
+        submitBtn.disabled = loading;
+        submitBtn.classList.toggle("loading", loading);
+    }
+
+    form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        hideMessages();
+        setLoading(true);
+
+        const name = document.getElementById("fullName").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
+        const referralCode = referralInput.value.trim() || null;
+
+        if (!name || !email || !phone || !password) {
+            showError("Please fill all required fields.");
+            setLoading(false);
+            return;
+        }
+
+        if (password.length < 6) {
+            showError("Password must be at least 6 characters.");
+            setLoading(false);
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            showError("Please enter a valid email address.");
+            setLoading(false);
+            return;
+        }
+
+        try {
+            // Supabase Auth signup
+            const { data: authData, error: authError } = await supabaseClient.auth.signUp({
+                email,
+                password,
+            });
+
+            if (authError || !authData?.user) {
+                throw new Error(authError?.message || "Signup failed.");
+            }
+
+            const userId = authData.user.id;
+
+            let referred_by_id = null;
+            let referred_by_grand_id = null;
+
+            if (referralCode) {
+                const { data: refUser, error: refError } = await supabaseClient
+                    .from("profiles")
+                    .select("id, referred_by_id")
+                    .eq("referral_code", referralCode)
+                    .single();
+
+                if (!refError && refUser) {
+                    referred_by_id = refUser.id;
+                    referred_by_grand_id = refUser.referred_by_id || null;
+                } else {
+                    console.warn("Invalid referral code.");
+                }
+            }
+
+            const generatedCode = userId.slice(0, 8).toUpperCase();
+
+            const { error: dbError } = await supabaseClient.from("profiles").insert([
+                {
+                    id: userId,
+                    name,
+                    email,
+                    phone,
+                    referral_code: generatedCode,
+                    referral_code_used: referralCode,
+                    referred_by_id,
+                    referred_by_grand_id,
+                    wallet_balance: 0,
+                    created_at: new Date().toISOString(),
+                },
+            ]);
+
+            if (dbError) {
+                showError("User created, but profile saving failed: " + dbError.message);
+                setLoading(false);
+                return;
+            }
+
+            showSuccess("Account created successfully! Redirecting...");
+            setTimeout(() => {
+                window.location.href = "sign-in.html";
+            }, 2000);
+
+        } catch (err) {
+            showError(err.message || "An error occurred. Please try again.");
+            setLoading(false);
+        }
+    });
+
+    // Pre-focus filled inputs (for floating label effect)
+    inputs.forEach((input) => {
+        if (input.value) {
+            input.dispatchEvent(new Event("focus"));
+            input.dispatchEvent(new Event("blur"));
+        }
+    });
 });
