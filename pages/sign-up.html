@@ -1,163 +1,108 @@
-const SUPABASE_URL = "https://drvasafwzixcbiuuqxfa.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRydmFzYWZ3eml4Y2JpdXVxeGZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMyNjI3MzgsImV4cCI6MjA2ODgzODczOH0.WlHFd8vV31cQG8BUlmQPki3CJK6B4YFRfSYfnkveJQw";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <title>Signup | U-Network</title>
+    
+    <!-- Favicon -->
+    <link href="assets/img/favicon.ico" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="icon"/>
+    <link href="assets/img/android-chrome-192x192.png" rel="icon"/>
 
-const { createClient } = supabase;
-const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    <link rel="stylesheet" href="assets/css/sign-up.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="auth-background">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
 
-document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("signupForm");
-    const submitBtn = document.getElementById("submitBtn");
-    const passwordInput = document.getElementById("password");
-    const passwordToggle = document.getElementById("passwordToggle");
-    const errorMessage = document.getElementById("errorMessage");
-    const successMessage = document.getElementById("successMessage");
-    const referralInput = document.getElementById("referral");
+    <main class="auth-container">
+        <div class="glass-card signup-card">
+            <div class="card-header">
+                <div class="logo-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                        <path d="M2 17l10 5 10-5"></path>
+                        <path d="M2 12l10 5 10-5"></path>
+                    </svg>
+                </div>
+                <h1 class="card-title">Create Account</h1>
+                <p class="card-subtitle">Create your account and start earning with every invite. U-Network is your trusted referral platform.</p>
+            </div>
 
-    if (!form) return;
+            <form id="signupForm" class="auth-form">
+                <div class="error-message" id="errorMessage"></div>
+                <div class="success-message" id="successMessage"></div>
 
-    // Prefill referral from URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const refCodeFromURL = urlParams.get("ref");
-    if (refCodeFromURL && referralInput) {
-        referralInput.value = refCodeFromURL.toUpperCase();
-    }
+                <div class="input-group">
+                    <input type="text" id="fullName" name="fullName" placeholder=" " required autocomplete="name">
+                    <label for="fullName">Full Name</label>
+                    <div class="input-highlight"></div>
+                </div>
 
-    // Password toggle
-    passwordToggle.addEventListener("click", function () {
-        const isPassword = passwordInput.type === "password";
-        passwordInput.type = isPassword ? "text" : "password";
-        this.classList.toggle("active", isPassword);
-    });
+                <div class="input-group">
+                    <input type="text" id="phone" name="phone" placeholder=" " required autocomplete="tel">
+                    <label for="phone">Phone Number</label>
+                    <div class="input-highlight"></div>
+                </div>
 
-    // Input focus animations
-    const inputs = form.querySelectorAll("input");
-    inputs.forEach((input) => {
-        input.addEventListener("focus", () => input.parentElement.classList.add("focused"));
-        input.addEventListener("blur", () => input.parentElement.classList.remove("focused"));
-    });
+                <div class="input-group">
+                    <input type="email" id="email" name="email" placeholder=" " required autocomplete="email">
+                    <label for="email">Email</label>
+                    <div class="input-highlight"></div>
+                </div>
 
-    function showError(msg) {
-        errorMessage.textContent = msg;
-        errorMessage.classList.add("show");
-        successMessage.classList.remove("show");
-    }
+                <div class="input-group">
+                    <input type="referral" id="referral" name="referral" placeholder=" " autocomplete="referral">
+                    <label for="referral">Referral Code (Optional)</label>
+                    <div class="input-highlight"></div>
+                </div>
 
-    function showSuccess(msg) {
-        successMessage.textContent = msg;
-        successMessage.classList.add("show");
-        errorMessage.classList.remove("show");
-    }
+                <div class="input-group password-group">
+                    <input type="password" id="password" name="password" placeholder=" " required autocomplete="new-password">
+                    <label for="password">Password</label>
+                    <button type="button" class="password-toggle" id="passwordToggle" aria-label="Toggle password visibility">
+                        <svg class="eye-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                        <svg class="eye-closed" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                            <line x1="1" y1="1" x2="23" y2="23"></line>
+                        </svg>
+                    </button>
+                    <div class="input-highlight"></div>
+                </div>
 
-    function hideMessages() {
-        errorMessage.classList.remove("show");
-        successMessage.classList.remove("show");
-    }
+                <button type="submit" class="btn-submit" id="submitBtn">
+                    <span class="btn-text">Create Account</span>
+                    <span class="btn-loader">
+                        <svg class="spinner" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle>
+                            <path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"></path>
+                        </svg>
+                    </span>
+                </button>
+            </form>
 
-    function setLoading(loading) {
-        submitBtn.disabled = loading;
-        submitBtn.classList.toggle("loading", loading);
-    }
+            <div class="card-footer">
+                <p>Already have an account? <a href="sign-in.html" class="auth-link">Log in</a></p>
+            </div>
+        </div>
+    </main>
 
-    form.addEventListener("submit", async function (e) {
-        e.preventDefault();
-        hideMessages();
-        setLoading(true);
+    <footer class="minimal-footer">
+        <p>&copy; 2025 U-Network. All rights reserved.</p>
+    </footer>
 
-        const name = document.getElementById("fullName").value.trim();
-        const phone = document.getElementById("phone").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const password = document.getElementById("password").value.trim();
-        const referralCode = referralInput.value.trim() || null;
-
-        if (!name || !email || !phone || !password) {
-            showError("Please fill all required fields.");
-            setLoading(false);
-            return;
-        }
-
-        if (password.length < 6) {
-            showError("Password must be at least 6 characters.");
-            setLoading(false);
-            return;
-        }
-
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            showError("Please enter a valid email address.");
-            setLoading(false);
-            return;
-        }
-
-        try {
-            // Supabase Auth signup
-            const { data: authData, error: authError } = await supabaseClient.auth.signUp({
-                email,
-                password,
-            });
-
-            if (authError || !authData?.user) {
-                throw new Error(authError?.message || "Signup failed.");
-            }
-
-            const userId = authData.user.id;
-
-            let referred_by_id = null;
-            let referred_by_grand_id = null;
-
-            if (referralCode) {
-                const { data: refUser, error: refError } = await supabaseClient
-                    .from("profiles")
-                    .select("id, referred_by_id")
-                    .eq("referral_code", referralCode)
-                    .single();
-
-                if (!refError && refUser) {
-                    referred_by_id = refUser.id;
-                    referred_by_grand_id = refUser.referred_by_id || null;
-                } else {
-                    console.warn("Invalid referral code.");
-                }
-            }
-
-            const generatedCode = userId.slice(0, 8).toUpperCase();
-
-            const { error: dbError } = await supabaseClient.from("profiles").insert([
-                {
-                    id: userId,
-                    name,
-                    email,
-                    phone,
-                    referral_code: generatedCode,
-                    referral_code_used: referralCode,
-                    referred_by_id,
-                    referred_by_grand_id,
-                    wallet_balance: 0,
-                    created_at: new Date().toISOString(),
-                },
-            ]);
-
-            if (dbError) {
-                showError("User created, but profile saving failed: " + dbError.message);
-                setLoading(false);
-                return;
-            }
-
-            showSuccess("Account created successfully! Redirecting...");
-            setTimeout(() => {
-                window.location.href = "sign-in.html";
-            }, 2000);
-
-        } catch (err) {
-            showError(err.message || "An error occurred. Please try again.");
-            setLoading(false);
-        }
-    });
-
-    // Pre-focus filled inputs (for floating label effect)
-    inputs.forEach((input) => {
-        if (input.value) {
-            input.dispatchEvent(new Event("focus"));
-            input.dispatchEvent(new Event("blur"));
-        }
-    });
-});
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="assets/js/sign-up.js"></script>
+</body>
+</html>
