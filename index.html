@@ -571,6 +571,36 @@
         </svg>
     </a>
 
+    <script type="module">
+    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+    const SUPABASE_URL = "https://drvasafwzixcbiuuqxfa.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRydmFzYWZ3eml4Y2JpdXVxeGZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMyNjI3MzgsImV4cCI6MjA2ODgzODczOH0.WlHFd8vV31cQG8BUlmQPki3CJK6B4YFRfSYfnkveJQw";
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const form = document.getElementById("contactForm");
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const message = document.getElementById("message").value.trim();
+
+        const { error } = await supabase
+            .from("contact_messages")
+            .insert([{ name, email, message }]);
+
+        if (error) {
+            alert("Failed to send message. Try again.");
+            console.error(error);
+        } else {
+            alert("Message sent successfully!");
+            form.reset();
+        }
+    });
+    </script>
     <script src="js/main.js"></script>
 </body>
 </html>
