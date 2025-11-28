@@ -509,6 +509,7 @@
                                     <polygon points="22 2 15 22 11 13 2 9 22 2"/>
                                 </svg>
                             </button>
+                            <div id="formStatus" class="form-status"></div>
                         </form>
                     </div>
                 </div>
@@ -574,12 +575,19 @@
     <script type="module">
     import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-    const SUPABASE_URL = "https://drvasafwzixcbiuuqxfa.supabase.co";
-    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRydmFzYWZ3eml4Y2JpdXVxeGZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMyNjI3MzgsImV4cCI6MjA2ODgzODczOH0.WlHFd8vV31cQG8BUlmQPki3CJK6B4YFRfSYfnkveJQw";
-
-    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const supabase = createClient(
+      "https://drvasafwzixcbiuuqxfa.supabase.co",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRydmFzYWZ3eml4Y2JpdXVxeGZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMyNjI3MzgsImV4cCI6MjA2ODgzODczOH0.WlHFd8vV31cQG8BUlmQPki3CJK6B4YFRfSYfnkveJQw"
+    );
 
     const form = document.getElementById("contactForm");
+    const statusBox = document.getElementById("formStatus");
+
+    function showStatus(message, type) {
+        statusBox.innerHTML = message;
+        statusBox.className = "form-status " + (type === "success" ? "form-success" : "form-error");
+        statusBox.style.display = "block";
+    }
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -588,15 +596,17 @@
         const email = document.getElementById("email").value.trim();
         const message = document.getElementById("message").value.trim();
 
+        showStatus("Sending...", "success"); // aesthetic loading look
+
         const { error } = await supabase
             .from("contact_messages")
             .insert([{ name, email, message }]);
 
         if (error) {
-            alert("Failed to send message. Try again.");
             console.error(error);
+            showStatus("❌ Failed to send message. Please try again.", "error");
         } else {
-            alert("Message sent successfully!");
+            showStatus("✔ Message sent successfully!", "success");
             form.reset();
         }
     });
