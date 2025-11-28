@@ -151,7 +151,7 @@ function initLoginForm() {
                 showError(errorMessage);
                 setButtonLoading(submitBtn, false);
             } else {
-                showSuccess('Login successful! Redirecting...');
+                showSuccess('Login successful!');
                 
                 setTimeout(() => {
                     window.location.href = 'dashboard.html';
