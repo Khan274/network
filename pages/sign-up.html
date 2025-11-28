@@ -1,205 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <title>Signup | U-Network</title>
     
     <!-- Favicon -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-icon.png" rel="icon"/>
-    
-    <!-- Fonts and icons -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
-      rel="stylesheet" />
-    <!-- Font Awesome Icons -->
-    <script
-      src="https://kit.fontawesome.com/42d5adcbca.js"
-      crossorigin="anonymous"></script>
-    <!-- Nucleo Icons -->
-    <link href="assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
-    <!-- Main Styling -->
-    <link
-      href="assets/css/soft-ui-dashboard-tailwind.css?v=1.0.5"
-      rel="stylesheet" />
-  </head>
+    <link href="assets/img/favicon.ico" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="icon"/>
+    <link href="assets/img/android-chrome-192x192.png" rel="icon"/>
 
-  <body
-    class="m-0 font-sans antialiased font-normal bg-white text-start text-base leading-default text-slate-500">
-    <!-- Navbar -->
-    <nav
-      class="absolute top-0 z-30 flex flex-wrap items-center justify-between w-full px-4 py-2 mt-6 mb-4 shadow-none lg:flex-nowrap lg:justify-start">
-      <div
-        class="container flex items-center justify-between py-0 flex-wrap-inherit">
-        <a
-          class="py-2.375 text-sm mr-4 ml-4 whitespace-nowrap font-bold text-white lg:ml-0"
-          href="pages/dashboard.html">
-          U-Network
-        </a>
-          <!-- online builder btn  -->
-          <!-- <li class="flex items-center">
-            <a
-              class="leading-pro ease-soft-in border-white/75 text-xs tracking-tight-soft rounded-3.5xl hover:border-white/75 hover:scale-102 active:hover:border-white/75 active:hover:scale-102 active:opacity-85 active:shadow-soft-xs active:border-white/75 bg-white/10 hover:bg-white/10 active:hover:bg-white/10 mr-2 mb-0 inline-block cursor-pointer border border-solid py-2 px-8 text-center align-middle font-bold uppercase text-white shadow-none transition-all hover:text-white hover:opacity-75 hover:shadow-none active:scale-100 active:bg-white active:text-black active:hover:text-white active:hover:opacity-75 active:hover:shadow-none"
-              target="_blank"
-              href="https://www.creative-tim.com/builder/soft-ui?ref=navbar-dashboard&amp;_ga=2.76518741.1192788655.1647724933-1242940210.1644448053"
-              >Online Builder</a
-            >
-          </li> -->
-        </div>
-      </div>
-    </nav>
+    <link rel="stylesheet" href="assets/css/sign-up.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="auth-background">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
 
-    <main class="mt-0 transition-all duration-200 ease-soft-in-out">
-      <section class="min-h-screen mb-32">
-        <div
-          class="relative flex items-start pt-12 pb-56 m-4 overflow-hidden bg-center bg-cover min-h-50-screen rounded-xl"
-          style="
-            background-image: url('assets/img/curved-images/curved14.jpg');
-          ">
-          <span
-            class="absolute top-0 left-0 w-full h-full bg-center bg-cover bg-gradient-to-tl from-gray-900 to-slate-800 opacity-60"></span>
-          <div class="container z-10">
-            <div class="flex flex-wrap justify-center -mx-3">
-              <div
-                class="w-full max-w-full px-3 mx-auto mt-0 text-center lg:flex-0 shrink-0 lg:w-5/12">
-                <h1 class="mt-12 mb-2 text-white">Welcome!</h1>
-                <p class="text-white">
-                  Create your account and start earning with every invite. U-Network is your trusted referral platform.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="container">
-          <div class="flex flex-wrap -mx-3 -mt-48 md:-mt-56 lg:-mt-48">
-            <div class="w-full max-w-full px-3 mx-auto mt-0 md:flex-0 shrink-0 md:w-7/12 lg:w-5/12 xl:w-4/12">
-              <div class="relative z-0 flex flex-col min-w-0 break-words bg-white border-0 shadow-soft-xl rounded-2xl bg-clip-border">
-                <div class="p-6 mb-0 text-center bg-white border-b-0 rounded-t-2xl">
-                  <h5>Create Your Account</h5>
+    <main class="auth-container">
+        <div class="glass-card signup-card">
+            <div class="card-header">
+                <div class="logo-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                        <path d="M2 17l10 5 10-5"></path>
+                        <path d="M2 12l10 5 10-5"></path>
+                    </svg>
                 </div>
-                <div class="flex-auto p-6">
-                  <form action="#" method="POST">
-                    <div class="mb-4">
-                      <input type="text" placeholder="Full Name" required class="text-sm block w-full rounded-lg border border-gray-300 py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500" />
-                    </div>
-                    <div class="mb-4">
-                      <input type="tel" placeholder="Phone Number" required class="text-sm block w-full rounded-lg border border-gray-300 py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500" />
-                    </div>
-                    <div class="mb-4">
-                      <input type="email" placeholder="Email" required class="text-sm block w-full rounded-lg border border-gray-300 py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500" />
-                    </div>
-                    <div class="mb-4">
-                      <input type="text" placeholder="Referral Code (optional)" class="text-sm block w-full rounded-lg border border-gray-300 py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500" />
-                    </div>
-                    <div class="mb-4">
-                      <input type="password" placeholder="Password" required class="text-sm block w-full rounded-lg border border-gray-300 py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500" />
-                    </div>
-                    <div class="text-center">
-                      <button
-                        type="submit"
-                        class="inline-block w-full px-6 py-3 mt-6 mb-2 font-bold text-center text-white uppercase align-middle transition-all bg-transparent border-0 rounded-lg cursor-pointer active:opacity-85 hover:scale-102 hover:shadow-soft-xs leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 bg-gradient-to-tl from-gray-900 to-slate-800 hover:border-slate-700 hover:bg-slate-700 hover:text-white">
-                        Sign up
-                      </button>
-                    </div>
-                    <p class="mt-4 mb-0 text-sm text-center">
-                      Already have an account?
-                      <a href="sign-in.html" class="font-bold text-purple-600">Sign in</a>
-                    </p>
-                  </form>
+                <h1 class="card-title">Create Account</h1>
+                <p class="card-subtitle">Create your account and start earning with every invite. U-Network is your trusted referral platform.</p>
+            </div>
+
+            <form id="signupForm" class="auth-form">
+                <div class="error-message" id="errorMessage"></div>
+                <div class="success-message" id="successMessage"></div>
+
+                <div class="input-group">
+                    <input type="text" id="fullName" name="fullName" placeholder=" " required autocomplete="name">
+                    <label for="fullName">Full Name</label>
+                    <div class="input-highlight"></div>
                 </div>
-              </div>
+
+                <div class="input-group">
+                    <input type="text" id="phone" name="phone" placeholder=" " required autocomplete="tel">
+                    <label for="phone">Phone Number</label>
+                    <div class="input-highlight"></div>
+                </div>
+
+                <div class="input-group">
+                    <input type="email" id="email" name="email" placeholder=" " required autocomplete="email">
+                    <label for="email">Email</label>
+                    <div class="input-highlight"></div>
+                </div>
+
+                <div class="input-group">
+                    <input type="referral" id="referral" name="referral" placeholder=" " autocomplete="referral">
+                    <label for="referral">Referral Code (Optional)</label>
+                    <div class="input-highlight"></div>
+                </div>
+
+                <div class="input-group password-group">
+                    <input type="password" id="password" name="password" placeholder=" " required autocomplete="new-password">
+                    <label for="password">Password</label>
+                    <button type="button" class="password-toggle" id="passwordToggle" aria-label="Toggle password visibility">
+                        <svg class="eye-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                        <svg class="eye-closed" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                            <line x1="1" y1="1" x2="23" y2="23"></line>
+                        </svg>
+                    </button>
+                    <div class="input-highlight"></div>
+                </div>
+
+                <button type="submit" class="btn-submit" id="submitBtn">
+                    <span class="btn-text">Create Account</span>
+                    <span class="btn-loader">
+                        <svg class="spinner" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle>
+                            <path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"></path>
+                        </svg>
+                    </span>
+                </button>
+            </form>
+
+            <div class="card-footer">
+                <p>Already have an account? <a href="sign-in.html" class="auth-link">Log in</a></p>
             </div>
-          </div>
         </div>
-      </section>
-      <!-- -------- START FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
-      <footer class="py-12">
-        <div class="container">
-          <div class="flex flex-wrap -mx-3">
-            <div
-              class="flex-shrink-0 w-full max-w-full mx-auto mb-6 text-center lg:flex-0 lg:w-8/12">
-              <a
-                href="https://khan274.github.io/network/"
-                class="mb-2 mr-4 text-slate-400 sm:mb-0 xl:mr-12">
-                Home
-              </a>
-              <a
-                href="https://khan274.github.io/network/#about"
-                class="mb-2 mr-4 text-slate-400 sm:mb-0 xl:mr-12">
-                About Us
-              </a>
-              <a
-                href="https://khan274.github.io/network/#feature"
-                target="_blank"
-                class="mb-2 mr-4 text-slate-400 sm:mb-0 xl:mr-12">
-                Pricing
-              </a>
-              <a
-                href="https://khan274.github.io/network/#contact"
-                class="mb-2 mr-4 text-slate-400 sm:mb-0 xl:mr-12">
-                Contact Us
-              </a>
-            </div>
-            <div
-              class="flex-shrink-0 w-full max-w-full mx-auto mt-2 mb-6 text-center lg:flex-0 lg:w-8/12">
-              <a
-                href="javascript:;"
-                target="_blank"
-                class="mr-6 text-slate-400">
-                <span class="text-lg fab fa-dribbble"></span>
-              </a>
-              <a
-                href="javascript:;"
-                target="_blank"
-                class="mr-6 text-slate-400">
-                <span class="text-lg fab fa-twitter"></span>
-              </a>
-              <a
-                href="javascript:;"
-                target="_blank"
-                class="mr-6 text-slate-400">
-                <span class="text-lg fab fa-instagram"></span>
-              </a>
-              <a
-                href="javascript:;"
-                target="_blank"
-                class="mr-6 text-slate-400">
-                <span class="text-lg fab fa-pinterest"></span>
-              </a>
-              <a
-                href="javascript:;"
-                target="_blank"
-                class="mr-6 text-slate-400">
-                <span class="text-lg fab fa-github"></span>
-              </a>
-            </div>
-          </div>
-          <div class="flex flex-wrap -mx-3">
-            <div class="w-8/12 max-w-full px-3 mx-auto mt-1 text-center flex-0">
-              <p class="mb-0 text-slate-400">
-                Copyright ©
-                <script>
-                  document.write(new Date().getFullYear());
-                </script>
-                U-Network 
-              </p>
-            </div>
-          </div>
-        </div>
-      </footer>
-      <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
     </main>
-  </body>
-  <!-- plugin for scrollbar  -->
-  <script src="assets/js/plugins/perfect-scrollbar.min.js" async></script>
-  <!-- main script file  -->
-  <script
-    src="assets/js/soft-ui-dashboard-tailwind.js?v=1.0.5"
-    async></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <script src="assets/js/sign-up.js"></script>
 
+    <footer class="minimal-footer">
+        <p>&copy; 2025 U-Network. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="assets/js/sign-up.js"></script>
+</body>
 </html>
