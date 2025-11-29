@@ -1,353 +1,354 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Billing | U-Network</title>
 
-    <!-- Favicon -->
     <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-icon.png" rel="icon"/>
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-    <!--     Fonts and icons     -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
-      rel="stylesheet" />
-    <!-- Font Awesome Icons -->
-    <script
-      src="https://kit.fontawesome.com/42d5adcbca.js"
-      crossorigin="anonymous"></script>
-    <!-- Nucleo Icons -->
-    <link href="./assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-    <!-- Popper -->
-    <script src="https://unpkg.com/@popperjs/core@2"></script>
-    <!-- Main Styling -->
-    <link
-      href="./assets/css/soft-ui-dashboard-tailwind.css?v=1.0.5"
-      rel="stylesheet" />
-  </head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/billing.css">
+</head>
+<body data-theme="light">
+    <div class="cursor-glow" id="cursorGlow"></div>
+    
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
 
-  <body
-    class="m-0 font-sans text-base antialiased font-normal leading-default bg-gray-50 text-slate-500">
-    <!-- sidenav  -->
-    <aside
-      class="max-w-62.5 ease-nav-brand z-990 fixed inset-y-0 my-4 ml-4 block w-full -translate-x-full flex-wrap items-center justify-between overflow-y-auto rounded-2xl border-0 bg-white p-0 antialiased shadow-none transition-transform duration-200 xl:left-0 xl:translate-x-0 xl:bg-transparent">
-      <div class="h-19.5">
-        <i
-          class="absolute top-0 right-0 hidden p-4 opacity-50 cursor-pointer fas fa-times text-slate-400 xl:hidden"
-          sidenav-close></i>
-        <a
-          class="block px-8 py-6 m-0 text-sm whitespace-nowrap text-slate-700"
-          href="javascript:;"
-          target="_blank">
-          <img
-            src="./assets/img/logo-ct.png"
-            class="inline h-full max-w-full transition-all duration-200 ease-nav-brand max-h-8"
-            alt="main_logo" />
-          <span
-            class="ml-1 font-semibold transition-all duration-200 ease-nav-brand"
-            >U-Network Dashboard</span
-          >
-        </a>
-      </div>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-      <hr
-        class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent" />
-
-      <div
-        class="items-center block w-auto max-h-screen overflow-auto h-sidenav grow basis-full">
-        <ul class="flex flex-col pl-0 mb-0">
-          <li class="mt-0.5 w-full">
-            <a
-              class="py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors"
-              href="dashboard.html">
-              <div
-                class="shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
-                <svg
-                  width="12px"
-                  height="12px"
-                  viewBox="0 0 45 40"
-                  version="1.1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink">
-                  <title>shop</title>
-                  <g
-                    stroke="none"
-                    stroke-width="1"
-                    fill="none"
-                    fill-rule="evenodd">
-                    <g
-                      transform="translate(-1716.000000, -439.000000)"
-                      fill="#FFFFFF"
-                      fill-rule="nonzero">
-                      <g transform="translate(1716.000000, 291.000000)">
-                        <g transform="translate(0.000000, 148.000000)">
-                          <path
-                            class="fill-slate-800 opacity-60"
-                            d="M46.7199583,10.7414583 L40.8449583,0.949791667 C40.4909749,0.360605034 39.8540131,0 39.1666667,0 L7.83333333,0 C7.1459869,0 6.50902508,0.360605034 6.15504167,0.949791667 L0.280041667,10.7414583 C0.0969176761,11.0460037 -1.23209662e-05,11.3946378 -1.23209662e-05,11.75 C-0.00758042603,16.0663731 3.48367543,19.5725301 7.80004167,19.5833333 L7.81570833,19.5833333 C9.75003686,19.5882688 11.6168794,18.8726691 13.0522917,17.5760417 C16.0171492,20.2556967 20.5292675,20.2556967 23.494125,17.5760417 C26.4604562,20.2616016 30.9794188,20.2616016 33.94575,17.5760417 C36.2421905,19.6477597 39.5441143,20.1708521 42.3684437,18.9103691 C45.1927731,17.649886 47.0084685,14.8428276 47.0000295,11.75 C47.0000295,11.3946378 46.9030823,11.0460037 46.7199583,10.7414583 Z"></path>
-                          <path
-                            class="fill-slate-800"
-                            d="M39.198,22.4912623 C37.3776246,22.4928106 35.5817531,22.0149171 33.951625,21.0951667 L33.92225,21.1107282 C31.1430221,22.6838032 27.9255001,22.9318916 24.9844167,21.7998837 C24.4750389,21.605469 23.9777983,21.3722567 23.4960833,21.1018359 L23.4745417,21.1129513 C20.6961809,22.6871153 17.4786145,22.9344611 14.5386667,21.7998837 C14.029926,21.6054643 13.533337,21.3722507 13.0522917,21.1018359 C11.4250962,22.0190609 9.63246555,22.4947009 7.81570833,22.4912623 C7.16510551,22.4842162 6.51607673,22.4173045 5.875,22.2911849 L5.875,44.7220845 C5.875,45.9498589 6.7517757,46.9451667 7.83333333,46.9451667 L19.5833333,46.9451667 L19.5833333,33.6066734 L27.4166667,33.6066734 L27.4166667,46.9451667 L39.1666667,46.9451667 C40.2482243,46.9451667 41.125,45.9498589 41.125,44.7220845 L41.125,22.2822926 C40.4887822,22.4116582 39.8442868,22.4815492 39.198,22.4912623 Z"></path>
-                        </g>
-                      </g>
-                    </g>
-                  </g>
-                </svg>
-              </div>
-              <span
-                class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft"
-                >Dashboard</span
-              >
+    <aside class="sidebar glass-card" id="sidebar">
+        <div class="sidebar-header">
+            <a href="#" class="sidebar-logo">
+                <img src="./assets/img/logo-ct.png" style=" height: 35px; width: 35px; " alt="Logo">
+                <span class="logo-text">U-Network</span>
             </a>
-          </li>
-
-          <li class="mt-0.5 w-full">
-            <a
-              class="py-2.7 shadow-soft-xl text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap rounded-lg bg-white px-4 font-semibold text-slate-700 transition-colors"
-              href="../pages/billing.html">
-              <div
-                class="bg-gradient-to-tl from-purple-700 to-pink-500 shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center fill-current stroke-0 text-center xl:p-2.5">
-                <svg
-                  width="12px"
-                  height="12px"
-                  viewBox="0 0 43 36"
-                  version="1.1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink">
-                  <title>credit-card</title>
-                  <g
-                    stroke="none"
-                    stroke-width="1"
-                    fill="none"
-                    fill-rule="evenodd">
-                    <g
-                      transform="translate(-2169.000000, -745.000000)"
-                      fill="#FFFFFF"
-                      fill-rule="nonzero">
-                      <g transform="translate(1716.000000, 291.000000)">
-                        <g transform="translate(453.000000, 454.000000)">
-                          <path
-                            class="opacity-60"
-                            d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"></path>
-                          <path
-                            class=""
-                            d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
-                        </g>
-                      </g>
-                    </g>
-                  </g>
+            <button class="sidebar-close" id="sidebarClose">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
-              </div>
-              <span
-                class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft"
-                >Billing</span
-              >
-            </a>
-          </li>
-
-          <li class="mt-0.5 w-full">
-            <a
-              class="py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors"
-              href="profile.html">
-              <div
-                class="shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
-                <svg
-                  width="12px"
-                  height="12px"
-                  viewBox="0 0 46 42"
-                  version="1.1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlns:xlink="http://www.w3.org/1999/xlink">
-                  <title>customer-support</title>
-                  <g
-                    stroke="none"
-                    stroke-width="1"
-                    fill="none"
-                    fill-rule="evenodd">
-                    <g
-                      transform="translate(-1717.000000, -291.000000)"
-                      fill="#FFFFFF"
-                      fill-rule="nonzero">
-                      <g transform="translate(1716.000000, 291.000000)">
-                        <g transform="translate(1.000000, 0.000000)">
-                          <path
-                            class="fill-slate-800 opacity-60"
-                            d="M45,0 L26,0 C25.447,0 25,0.447 25,1 L25,20 C25,20.379 25.214,20.725 25.553,20.895 C25.694,20.965 25.848,21 26,21 C26.212,21 26.424,20.933 26.6,20.8 L34.333,15 L45,15 C45.553,15 46,14.553 46,14 L46,1 C46,0.447 45.553,0 45,0 Z"></path>
-                          <path
-                            class="fill-slate-800"
-                            d="M22.883,32.86 C20.761,32.012 17.324,31 13,31 C8.676,31 5.239,32.012 3.116,32.86 C1.224,33.619 0,35.438 0,37.494 L0,41 C0,41.553 0.447,42 1,42 L25,42 C25.553,42 26,41.553 26,41 L26,37.494 C26,35.438 24.776,33.619 22.883,32.86 Z"></path>
-                          <path
-                            class="fill-slate-800"
-                            d="M13,28 C17.432,28 21,22.529 21,18 C21,13.589 17.411,10 13,10 C8.589,10 5,13.589 5,18 C5,22.529 8.568,28 13,28 Z"></path>
-                        </g>
-                      </g>
-                    </g>
-                  </g>
-                </svg>
-              </div>
-              <span
-                class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft"
-                >Profile</span>
-            </a>
-          </li>
+            </button>
         </div>
-      </div>
+        
+        <nav class="sidebar-nav">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="dashboard.html" class="nav-link">
+                        <div class="nav-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="7" height="9"></rect>
+                                <rect x="14" y="3" width="7" height="5"></rect>
+                                <rect x="14" y="12" width="7" height="9"></rect>
+                                <rect x="3" y="16" width="7" height="5"></rect>
+                            </svg>
+                        </div>
+                        <span class="nav-text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="billing.html" class="nav-link active">
+                        <div class="nav-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                                <line x1="1" y1="10" x2="23" y2="10"></line>
+                            </svg>
+                        </div>
+                        <span class="nav-text">Billing</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="profile.html" class="nav-link">
+                        <div class="nav-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <span class="nav-text">Profile</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-info glass-card">
+                <div class="user-avatar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
+                <div class="user-details">
+                    <span class="user-name">User</span>
+                </div>
+            </div>
+        </div>
     </aside>
 
-    <!-- end sidenav -->
-
-    <main
-      class="ease-soft-in-out xl:ml-68.5 relative h-full max-h-screen rounded-xl transition-all duration-200">
-      <!-- Navbar -->
-      <nav
-        class="relative flex flex-wrap items-center justify-between px-0 py-2 mx-6 transition-all shadow-none duration-250 ease-soft-in rounded-2xl lg:flex-nowrap lg:justify-start"
-        navbar-main
-        navbar-scroll="true">
-        <div
-          class="flex items-center justify-between w-full px-4 py-1 mx-auto flex-wrap-inherit">
-          <nav>
-            <!-- breadcrumb -->
-            <h6 class="mb-0 font-bold capitalize">Billing</h6>
-          </nav>
-
-          <div
-            class="flex items-center mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
-            <ul
-              class="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
-              <li class="flex items-center pl-4 xl:hidden">
-                <a
-                  href="javascript:;"
-                  class="block p-0 text-sm transition-all ease-nav-brand text-slate-500"
-                  sidenav-trigger>
-                  <div class="w-4.5 overflow-hidden">
-                    <i
-                      class="ease-soft mb-0.75 relative block h-0.5 rounded-sm bg-slate-500 transition-all"></i>
-                    <i
-                      class="ease-soft mb-0.75 relative block h-0.5 rounded-sm bg-slate-500 transition-all"></i>
-                    <i
-                      class="ease-soft relative block h-0.5 rounded-sm bg-slate-500 transition-all"></i>
-                  </div>
-                </a>
-              </li>
-              <!-- <li class="flex items-center px-4">
-                <a
-                  href="javascript:;"
-                  class="p-0 text-sm transition-all ease-nav-brand text-slate-500">
-                  <i
-                    fixed-plugin-button-nav
-                    class="cursor-pointer fa fa-cog"></i>
-                </a>
-              </li>-->
-            </ul>
-          </div>
-        </div>
-      </nav>
-
-
-      <!-- end Navbar -->
-
-      <!-- cards -->
-      <div class="w-full px-6 py-6 mx-auto">
-        <!-- Dashboard Cards Column Layout -->
-        <div class="flex flex-col items-center gap-6 py-10">
-
-
-          <!-- Invite Button -->
-          <div class="w-full max-w-md">
-            <div class="flex flex-col min-w-0 break-words bg-white shadow-soft-xl rounded-2xl h-full justify-center items-center p-6">
-              <h5 id="wallet-balance" class="mb-0 font-bold text-lg text-blue-600">🔐 How to Make Payment</h5><br>
-              <p class="text-sm font-semibold text-slate-600 mb-3">
-                <b>Please follow the steps below to subscribe to a plan:</b> <br>
-                <b>1. Choose a Plan:</b><br>
-                    &nbsp;Go to the <a href="https://khan274.github.io/network/#pricing"><u>Pricing Page</u></a> and select one of the following plans:<br>
-                      &nbsp;&nbsp; ● Starter Plan – PKR 400<br>
-                      &nbsp;&nbsp; ● Growth Plan – PKR 560<br>
-                      &nbsp;&nbsp; ● Elite Plan – PKR 750<br><br>
-                <b>2. Send Payment</b><br>
-                    &nbsp;Transfer the exact amount for your selected plan to the following account via <!---<b>EasyPaisa</b>--->:<br>
-                      &nbsp;&nbsp; ● <b>Account Number:</b> 0335-5403569<br>
-                      &nbsp;&nbsp; ● <b>Account Title:</b> Muhammad Khizar<br><br>
-
-                <b>3. Take a Screenshot</b><br>
-                    &nbsp;After successful payment, <b>take a clear screenshot</b> of your transaction confirmation.<br><br>
-
-                <b>4. Send Screenshot for Verification</b><br>
-                    &nbsp;Send your payment screenshot to us on <b>WhatsApp</b>:<br>
-                     &nbsp;&nbsp; ● <b>📱 WhatsApp Number:</b> <a href="https://wa.me/923355403569"><u>+92 335 5403569</u></a><br><br>
-
-                <b>5. Wait for Confirmation</b><br>
-                    &nbsp;Your account will be activated shortly after your payment is verified (usually within a few minutes to 1 hour).<br><br>   
-              </p>
-            </div>
-          </div>
-        </div>
-      </div><br>
-
-      <!------------------ Footer ------------------>
-
-        <footer class="pt-4">
-          <div class="w-full px-6 mx-auto">
-            <div class="flex flex-wrap items-center -mx-3 lg:justify-between">
-              <div
-                class="w-full max-w-full px-3 mt-0 mb-6 shrink-0 lg:mb-0 lg:w-1/2 lg:flex-none">
-                <div
-                  class="text-sm leading-normal text-center text-slate-500 lg:text-left">
-                  Copyright ©
-                  <script>
-                    document.write(new Date().getFullYear() + ",");
-                  </script>
-                  U-Network
+    <div class="main-wrapper">
+        <header class="topbar glass-card">
+            <div class="topbar-left">
+                <button class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="page-info">
+                    <h1 class="page-title">Billing</h1>
+                    <p class="page-subtitle">Add funds to your wallet</p>
                 </div>
-              </div>
-              <div
-                class="w-full max-w-full px-3 mt-0 shrink-0 lg:w-1/2 lg:flex-none">
-                <ul
-                  class="flex flex-wrap justify-center pl-0 mb-0 list-none lg:justify-end">
-                  <li class="nav-item">
-                    <a href="https://khan274.github.io/network/#about" class="block px-4 pt-0 pb-1 text-sm font-normal transition-colors ease-soft-in-out text-slate-500" >About us</a>
-                  </li>
-                  </li>
-                  <li class="nav-item">
-                    <a href="https://khan274.github.io/network/#contact" class="block px-4 pt-0 pb-1 text-sm font-normal transition-colors ease-soft-in-out text-slate-500" >Contact us</a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="https://khan274.github.io/network/#feature" class="block px-4 pt-0 pb-1 pr-0 text-sm font-normal transition-colors ease-soft-in-out text-slate-500">How it works?</a
-                    >
-                  </li>
-                </ul>
-              </div>
             </div>
-          </div>
-        </footer>
-        
+            <div class="topbar-right">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+            </div>
+        </header>
 
-        <!-- WhatsApp Floating Button -->
-        <a href="https://wa.me/923355403569" target="_blank" id="whatsapp-btn">
-          <i class="fab fa-whatsapp"></i>
-        </a>
+        <main class="main-content">
+            <div class="loading-overlay" id="loadingOverlay">
+                <div class="loading-spinner">
+                    <div class="spinner"></div>
+                    <p>Loading your wallet...</p>
+                </div>
+            </div>
 
+            <section class="packages-section">
+                <h2 class="section-title">Select Package</h2>
+                <div class="packages-grid" id="packagesGrid">
+                    <div class="package-card glass-card" data-amount="500">
+                        <div class="card-glow"></div>
+                        <div class="package-content">
+                            <div class="package-amount">
+                                <span class="currency">PKR</span>
+                                <span class="value">400</span>
+                            </div>
+                            <span class="package-label">Starter</span>
+                        </div>
+                    </div>
+                    <div class="package-card glass-card popular" data-amount="2500">
+                        <div class="card-glow"></div>
+                        <span class="popular-badge">Popular</span>
+                        <div class="package-content">
+                            <div class="package-amount">
+                                <span class="currency">PKR</span>
+                                <span class="value">560</span>
+                            </div>
+                            <span class="package-label">Growth</span>
+                        </div>
+                    </div>
+                    <div class="package-card glass-card" data-amount="5000">
+                        <div class="card-glow"></div>
+                        <div class="package-content">
+                            <div class="package-amount">
+                                <span class="currency">PKR</span>
+                                <span class="value">750</span>
+                            </div>
+                            <span class="package-label">Elite</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-      </div>
-      <!-- end cards -->
-    </main>
-  </body>
-  <!-- plugin for charts  -->
-  <script src="assets/js/plugins/chartjs.min.js" async></script>
-  <!-- plugin for scrollbar  -->
-  <script src="assets/js/plugins/perfect-scrollbar.min.js" async></script>
-  <!-- github button -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <!-- main script file  -->
-  <script
-    src="assets/js/soft-ui-dashboard-tailwind.js?v=1.0.5"
-    async></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <script src="assets/js/dashboard.js"></script>
+            <section class="payment-methods-section">
+                <h2 class="section-title">Select Payment Method</h2>
+                <div class="payment-methods-grid">
+                    <div class="payment-card glass-card" data-method="easypaisa" onclick="openPaymentModal('easypaisa')">
+                        <div class="card-glow"></div>
+                        <div class="payment-card-content">
+                            <div class="payment-logo easypaisa-logo">
+                                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="50" cy="50" r="45" fill="#00A651"/>
+                                    <text x="50" y="58" text-anchor="middle" fill="white" font-size="24" font-weight="bold">EP</text>
+                                </svg>
+                            </div>
+                            <h3 class="payment-name">Easypaisa</h3>
+                            <p class="payment-desc">Mobile wallet payment</p>
+                        </div>
+                    </div>
 
+                    <div class="payment-card glass-card" data-method="jazzcash" onclick="openPaymentModal('jazzcash')">
+                        <div class="card-glow"></div>
+                        <div class="payment-card-content">
+                            <div class="payment-logo jazzcash-logo">
+                                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="50" cy="50" r="45" fill="#E4002B"/>
+                                    <text x="50" y="58" text-anchor="middle" fill="white" font-size="24" font-weight="bold">JC</text>
+                                </svg>
+                            </div>
+                            <h3 class="payment-name">JazzCash</h3>
+                            <p class="payment-desc">Mobile wallet payment</p>
+                        </div>
+                    </div>
+
+                    <div class="payment-card glass-card" data-method="bank" onclick="openPaymentModal('bank')">
+                        <div class="card-glow"></div>
+                        <div class="payment-card-content">
+                            <div class="payment-logo bank-logo">
+                                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="50" cy="50" r="45" fill="#1E3A8A"/>
+                                    <path d="M50 25L25 40V45H75V40L50 25Z" fill="white"/>
+                                    <rect x="30" y="48" width="8" height="20" fill="white"/>
+                                    <rect x="46" y="48" width="8" height="20" fill="white"/>
+                                    <rect x="62" y="48" width="8" height="20" fill="white"/>
+                                    <rect x="25" y="70" width="50" height="5" fill="white"/>
+                                </svg>
+                            </div>
+                            <h3 class="payment-name">Bank Transfer</h3>
+                            <p class="payment-desc">Direct bank payment</p>
+                        </div>
+                    </div>
+
+                    <div class="payment-card glass-card" data-method="crypto" onclick="openPaymentModal('crypto')">
+                        <div class="card-glow"></div>
+                        <div class="payment-card-content">
+                            <div class="payment-logo crypto-logo">
+                                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="50" cy="50" r="45" fill="#F0B90B"/>
+                                    <path d="M50 30L60 40L50 50L40 40L50 30Z" fill="white"/>
+                                    <path d="M30 50L40 60L30 70L20 60L30 50Z" fill="white"/>
+                                    <path d="M70 50L80 60L70 70L60 60L70 50Z" fill="white"/>
+                                    <path d="M50 50L60 60L50 70L40 60L50 50Z" fill="white"/>
+                                </svg>
+                            </div>
+                            <h3 class="payment-name">Crypto</h3>
+                            <p class="payment-desc">Binance / Bybit</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="footer">
+                <div class="footer-content">
+                    <div class="footer-left">
+                        <p>&copy; <span id="currentYear"></span> U-Network. All rights reserved.</p>
+                    </div>
+                    <div class="footer-right">
+                        <a href="https://khan274.github.io/network/#about" target="_blank">About</a>
+                        <a href="https://khan274.github.io/network/#contact" target="_blank">Contact</a>
+                        <a href="https://khan274.github.io/network/#feature" target="_blank">How It Works</a>
+                    </div>
+                </div>
+            </footer>
+            
+        </main>
+    </div>
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="payment-modal glass-card" id="paymentModal">
+            <button class="modal-close" onclick="closePaymentModal()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            
+            <div class="modal-header">
+                <div class="modal-logo" id="modalLogo"></div>
+                <h2 class="modal-title" id="modalTitle">Payment Details</h2>
+            </div>
+
+            <div class="modal-body">
+                <div class="selected-amount-display">
+                    <span class="label">Amount to Pay</span>
+                    <div class="amount-value">
+                        <span class="currency">PKR</span>
+                        <span id="selectedAmountDisplay">0</span>
+                    </div>
+                </div>
+
+                <div class="qr-code-section">
+                    <div class="qr-code-wrapper">
+                        <div class="qr-placeholder" id="qrCode">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                            </svg>
+                            <span>Scan to Pay</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="payment-details">
+                    <div class="detail-row">
+                        <span class="detail-label">Account Name</span>
+                        <div class="detail-value-wrapper">
+                            <span class="detail-value" id="accountName">-</span>
+                            <button class="copy-btn" onclick="copyToClipboard('accountName')">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label" id="accountNumberLabel">Account Number</span>
+                        <div class="detail-value-wrapper">
+                            <span class="detail-value" id="accountNumber">-</span>
+                            <button class="copy-btn" onclick="copyToClipboard('accountNumber')">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-box">
+                    <div class="instruction-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                        </svg>
+                    </div>
+                    <p>After sending the payment, take a screenshot of the transaction and send it to us on WhatsApp to get faster approval.</p>
+                </div>
+
+                <a href="https://wa.me/923001234567" target="_blank" class="whatsapp-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    Send Screenshot on WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">
+        <div class="toast-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+        </div>
+        <span class="toast-message" id="toastMessage">Copied to clipboard!</span>
+    </div>
+
+    <script src="assets/js/billing.js"></script>
+</body>
 </html>
