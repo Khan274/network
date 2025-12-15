@@ -191,7 +191,7 @@ function capitalizeFirst(str) {
 
 function openPaymentModal(method) {
     if (selectedAmount < 100) {
-        showToast('Please select an amount of at least PKR 100');
+        showToast('Please select an amount of at least PKR 400');
         return;
     }
     
