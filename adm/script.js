@@ -125,7 +125,7 @@ window.drawLineChart = window.drawLineChart || function (canvas, labels, data, c
 
 const ALLOWED_ADMINS = [
     "admin@unetwork.com",
-    "partner1@example.com",
+    "modr1@unetwork.com",
     "partner2@example.com"
 ];
 
