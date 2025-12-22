@@ -337,6 +337,54 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
+    let profile = null;
+
+    // Try to load existing profile
+    const { data, error } = await supabaseClient
+        .from("profiles")
+        .select("plan_name, referral_code, wallet_balance, total_earnings")
+        .eq("id", userId)
+        .maybeSingle();
+
+    if (error) {
+        console.error("Supabase error:", error);
+        hideLoading();
+        return;
+    }
+
+    if (!data) {
+        // No profile found → create default one
+        const defaultProfile = {
+            id: userId,
+            plan_name: "Starter Plan",
+            referral_code: null,
+            wallet_balance: 0,
+            total_earnings: 0
+        };
+
+        const { data: newProfile, error: insertError } = await supabaseClient
+            .from("profiles")
+            .insert(defaultProfile)
+            .select()
+            .maybeSingle();
+
+        if (insertError) {
+            console.error("Failed to create default profile:", insertError);
+            hideLoading();
+            return;
+        }
+
+        profile = newProfile;
+    } else {
+        profile = data;
+    }
+
+    // Now you can safely use `profile` everywhere
+    const userPlan = profile.plan_name;
+    const referralCode = profile.referral_code;
+    const walletBalance = profile.wallet_balance;
+    const totalEarnings = profile.total_earnings;
+    
     const userPlan = profile.plan_name;
     const referralCode = profile.referral_code;
 
