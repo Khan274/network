@@ -50,7 +50,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const { data: userData, error: fetchError } = await supabaseClient
       .from('profiles')
       .select('name, phone, email, referral_code')
-      .eq('id', userId)
       .single();
 
     if (fetchError) throw fetchError;
