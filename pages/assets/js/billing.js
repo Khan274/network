@@ -1,8 +1,8 @@
 const paymentMethods = {
     easypaisa: {
         name: 'Easypaisa',
-        accountName: 'Muhammad Khizar',
-        accountNumber: '03355403569',
+        accountName: 'Sajid Zaman',
+        accountNumber: '03065382532',
         accountLabel: 'Mobile Number',
         color: '#00A651',
         logo: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -12,8 +12,8 @@ const paymentMethods = {
     },
     jazzcash: {
         name: 'JazzCash',
-        accountName: 'Muhammad Khizar',
-        accountNumber: '03355403569',
+        accountName: 'Sajid Zaman',
+        accountNumber: '03065382532',
         accountLabel: 'Mobile Number',
         color: '#E4002B',
         logo: `<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
