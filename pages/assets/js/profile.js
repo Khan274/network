@@ -2,7 +2,10 @@
 const SUPABASE_URL = 'https://drvasafwzixcbiuuqxfa.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRydmFzYWZ3eml4Y2JpdXVxeGZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMyNjI3MzgsImV4cCI6MjA2ODgzODczOH0.WlHFd8vV31cQG8BUlmQPki3CJK6B4YFRfSYfnkveJQw';
 
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
+);
 
 document.addEventListener('DOMContentLoaded', async () => {
   initUI();
@@ -16,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const {
       data: { session },
       error: sessionError,
-    } = await supabase.auth.getSession();
+    } = await supabaseClient.auth.getSession();
 
     if (sessionError || !session) {
       // If demo mode is enabled, show sample data instead of redirecting
@@ -34,7 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const {
       data: { user },
       error: userError,
-    } = await supabase.auth.getUser();
+    } = await supabaseClient.auth.getUser();
 
     if (userError || !user) {
       alert('User not found.');
@@ -71,7 +74,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (logoutBtn) {
       logoutBtn.addEventListener('click', async (e) => {
         e.preventDefault();
-        const { error } = await supabase.auth.signOut();
+        const { error } = await supabaseClient.auth.signOut();
         if (error) {
           alert('Logout failed: ' + error.message);
         } else {
@@ -85,7 +88,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (dropdownLogoutBtn) {
       dropdownLogoutBtn.addEventListener('click', async (e) => {
         e.preventDefault();
-        const { error } = await supabase.auth.signOut();
+        const { error } = await supabaseClient.auth.signOut();
         if (error) {
           alert('Logout failed: ' + error.message);
         } else {
