@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const userId = user.id;
 
     // Fetch user data from Supabase "profiles" table
-    const { data: userData, error: fetchError } = await supabase
+    const { data: userData, error: fetchError } = await supabaseClient
       .from('profiles')
       .select('name, phone, email, referral_code')
       .eq('id', userId)
