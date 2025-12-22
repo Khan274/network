@@ -329,7 +329,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         .from("profiles")
         .select("plan_name, referral_code, wallet_balance, total_earnings")
         .eq("id", userId)
-        .single();
+        .maybeSingle();
 
     if (profileError || !profile) {
         console.error("Failed to load profile:", profileError);
