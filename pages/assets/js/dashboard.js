@@ -39,9 +39,17 @@ function initSidebar() {
         document.body.style.overflow = '';
     }
 
-    if (menuToggle) menuToggle.addEventListener('click', openSidebar);
-    if (sidebarClose) sidebarClose.addEventListener('click', closeSidebar);
-    if (overlay) overlay.addEventListener('click', closeSidebar);
+    if (menuToggle) {
+        menuToggle.addEventListener('click', openSidebar);
+    }
+
+    if (sidebarClose) {
+        sidebarClose.addEventListener('click', closeSidebar);
+    }
+
+    if (overlay) {
+        overlay.addEventListener('click', closeSidebar);
+    }
 }
 
 function initDropdowns() {
@@ -95,8 +103,10 @@ function animateCounter(element, target, duration = 1500) {
         const easeProgress = 1 - Math.pow(1 - progress, 3);
         const current = Math.floor(start + (target - start) * easeProgress);
         element.textContent = current.toLocaleString();
-
-        if (progress < 1) requestAnimationFrame(update);
+        
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        }
     }
 
     requestAnimationFrame(update);
@@ -104,10 +114,13 @@ function animateCounter(element, target, duration = 1500) {
 
 function initScrollAnimations() {
     const elements = document.querySelectorAll('[data-aos]');
+    
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                setTimeout(() => entry.target.classList.add('aos-animate'), parseInt(entry.target.dataset.aosDelay) || 0);
+                setTimeout(() => {
+                    entry.target.classList.add('aos-animate');
+                }, parseInt(entry.target.dataset.aosDelay) || 0);
             }
         });
     }, { threshold: 0.1 });
@@ -157,6 +170,7 @@ function drawEarningsChart(directEarnings, indirectEarnings) {
     const gradient1 = ctx.createLinearGradient(0, height - padding, 0, height - padding - directEarnings * scale);
     gradient1.addColorStop(0, '#007AFF');
     gradient1.addColorStop(1, '#5AC8FA');
+
     ctx.fillStyle = gradient1;
     ctx.beginPath();
     ctx.roundRect(bar1X, height - padding - directEarnings * scale, barWidth, directEarnings * scale, [8, 8, 0, 0]);
@@ -165,6 +179,7 @@ function drawEarningsChart(directEarnings, indirectEarnings) {
     const gradient2 = ctx.createLinearGradient(0, height - padding, 0, height - padding - indirectEarnings * scale);
     gradient2.addColorStop(0, '#5856D6');
     gradient2.addColorStop(1, '#AF52DE');
+
     ctx.fillStyle = gradient2;
     ctx.beginPath();
     ctx.roundRect(bar2X, height - padding - indirectEarnings * scale, barWidth, indirectEarnings * scale, [8, 8, 0, 0]);
@@ -179,12 +194,16 @@ function drawEarningsChart(directEarnings, indirectEarnings) {
 
 function hideLoading() {
     const loadingOverlay = document.getElementById('loadingOverlay');
-    if (loadingOverlay) loadingOverlay.classList.add('hidden');
+    if (loadingOverlay) {
+        loadingOverlay.classList.add('hidden');
+    }
 }
 
 function showLoading() {
     const loadingOverlay = document.getElementById('loadingOverlay');
-    if (loadingOverlay) loadingOverlay.classList.remove('hidden');
+    if (loadingOverlay) {
+        loadingOverlay.classList.remove('hidden');
+    }
 }
 
 async function handleLogout() {
@@ -193,7 +212,9 @@ async function handleLogout() {
         return;
     }
     try {
-        if (supabaseClient) await supabaseClient.auth.signOut();
+        if (supabaseClient) {
+            await supabaseClient.auth.signOut();
+        }
         window.location.href = 'sign-in.html';
     } catch (error) {
         console.error('Logout error:', error);
@@ -217,20 +238,24 @@ function loadDemoData() {
     document.getElementById("sidebar-plan").textContent = demoData.userPlan;
 
     const totalInvitesEl = document.getElementById("total-invites");
-    if (totalInvitesEl) animateCounter(totalInvitesEl, demoData.directCount + demoData.indirectCount);
+    if (totalInvitesEl) {
+        animateCounter(totalInvitesEl, demoData.directCount + demoData.indirectCount);
+    }
 
     const walletBalanceEl = document.getElementById("wallet-balance");
     if (walletBalanceEl) {
         const amountSpan = walletBalanceEl.querySelector('.amount');
-        if (amountSpan) animateCounter(amountSpan, demoData.walletBalance);
-        else walletBalanceEl.textContent = `PKR ${demoData.walletBalance.toLocaleString()}`;
+        if (amountSpan) {
+            animateCounter(amountSpan, demoData.walletBalance);
+        }
     }
 
     const totalEarningsEl = document.getElementById("total-earnings");
     if (totalEarningsEl) {
         const amountSpan = totalEarningsEl.querySelector('.amount');
-        if (amountSpan) animateCounter(amountSpan, demoData.totalEarnings);
-        else totalEarningsEl.textContent = `PKR ${demoData.totalEarnings.toLocaleString()}`;
+        if (amountSpan) {
+            animateCounter(amountSpan, demoData.totalEarnings);
+        }
     }
 
     const directElem = document.getElementById("direct-invites");
@@ -240,61 +265,46 @@ function loadDemoData() {
     if (indirectElem) indirectElem.textContent = `Team: ${demoData.indirectCount}`;
 
     const directEarningsValueEl = document.getElementById("direct-earnings-value");
-    if (directEarningsValueEl) directEarningsValueEl.textContent = `PKR ${demoData.directEarnings.toLocaleString()}`;
+    if (directEarningsValueEl) {
+        directEarningsValueEl.textContent = `PKR ${demoData.directEarnings.toLocaleString()}`;
+    }
 
     const indirectEarningsValueEl = document.getElementById("indirect-earnings-value");
-    if (indirectEarningsValueEl) indirectEarningsValueEl.textContent = `PKR ${demoData.indirectEarnings.toLocaleString()}`;
-
-    setTimeout(() => drawEarningsChart(demoData.directEarnings, demoData.indirectEarnings), 500);
-    window.addEventListener('resize', () => drawEarningsChart(demoData.directEarnings, demoData.indirectEarnings));
-}
-
-async function loadUserProfile(userId) {
-    // Load profile or create default
-    let profile = null;
-    const { data, error } = await supabaseClient
-        .from("profiles")
-        .select("plan_name, referral_code, wallet_balance, total_earnings")
-        .eq("id", userId)
-        .maybeSingle();
-
-    if (error) {
-        console.error("Supabase error:", error);
-        hideLoading();
-        return null;
+    if (indirectEarningsValueEl) {
+        indirectEarningsValueEl.textContent = `PKR ${demoData.indirectEarnings.toLocaleString()}`;
     }
 
-    if (!data) {
-        // Create default profile
-        const defaultProfile = {
-            id: userId,
-            plan_name: "Starter Plan",
-            referral_code: null,
-            wallet_balance: 0,
-            total_earnings: 0
-        };
+    setTimeout(() => {
+        drawEarningsChart(demoData.directEarnings, demoData.indirectEarnings);
+    }, 500);
 
-        const { data: newProfile, error: insertError } = await supabaseClient
-            .from("profiles")
-            .insert(defaultProfile)
-            .select()
-            .maybeSingle();
-
-        if (insertError) {
-            console.error("Failed to create default profile:", insertError);
-            hideLoading();
-            return null;
-        }
-
-        profile = newProfile;
-    } else {
-        profile = data;
-    }
-
-    return profile;
+    window.addEventListener('resize', () => {
+        drawEarningsChart(demoData.directEarnings, demoData.indirectEarnings);
+    });
 }
 
-async function loadDashboard() {
+document.addEventListener("DOMContentLoaded", async () => {
+    initTheme();
+    initSidebar();
+    initDropdowns();
+    initCursorGlow();
+    initScrollAnimations();
+
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+    }
+
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', handleLogout);
+    }
+
+    const currentYearEl = document.getElementById('currentYear');
+    if (currentYearEl) {
+        currentYearEl.textContent = new Date().getFullYear();
+    }
+
     if (DEMO_MODE) {
         loadDemoData();
         return;
@@ -314,8 +324,18 @@ async function loadDashboard() {
     }
 
     const userId = user.id;
-    const profile = await loadUserProfile(userId);
-    if (!profile) return;
+
+    const { data: profile, error: profileError } = await supabaseClient
+        .from("profiles")
+        .select("plan_name, referral_code, wallet_balance, total_earnings")
+        .eq("id", userId)
+        .single();
+
+    if (profileError || !profile) {
+        console.error("Failed to load profile:", profileError);
+        hideLoading();
+        return;
+    }
 
     const userPlan = profile.plan_name;
     const referralCode = profile.referral_code;
@@ -327,11 +347,10 @@ async function loadDashboard() {
     };
 
     const selectedPlan = plans[userPlan];
-
-    document.getElementById("plan-name").textContent = userPlan || "Not Set";
-    document.getElementById("sidebar-plan").textContent = userPlan || "Not Set";
-
     if (!selectedPlan || !referralCode) {
+        console.warn("Plan or referral code missing.");
+        document.getElementById("plan-name").textContent = userPlan || "Not Set";
+        document.getElementById("sidebar-plan").textContent = userPlan || "Not Set";
         hideLoading();
         return;
     }
@@ -347,26 +366,40 @@ async function loadDashboard() {
         .eq("referral_code_used", referralCode)
         .not("plan_name", "is", null);
 
-    if (!directReferrals) directReferrals = [];
+    if (directError) {
+        console.error("Failed to load direct referrals:", directError);
+        hideLoading();
+        return;
+    }
+
     directCount = directReferrals.length;
 
     for (const direct of directReferrals) {
         const referredPlan = plans[direct.plan_name];
-        if (referredPlan) directEarnings += (referredPlan.price * selectedPlan.direct) / 100;
+        if (referredPlan) {
+            const earning = (referredPlan.price * selectedPlan.direct) / 100;
+            directEarnings += earning;
+        }
+    }
 
-        const { data: indirects } = await supabaseClient
+    for (const direct of directReferrals) {
+        const { data: indirects, error: indirectError } = await supabaseClient
             .from("profiles")
             .select("plan_name")
             .eq("referral_code_used", direct.referral_code)
             .not("plan_name", "is", null);
 
-        if (indirects && indirects.length > 0) {
-            for (const indirect of indirects) {
-                const indirectPlan = plans[indirect.plan_name];
-                if (indirectPlan) indirectEarnings += (indirectPlan.price * selectedPlan.indirect) / 100;
+        if (indirectError) continue;
+
+        for (const indirect of indirects) {
+            const indirectPlan = plans[indirect.plan_name];
+            if (indirectPlan) {
+                const earning = (indirectPlan.price * selectedPlan.indirect) / 100;
+                indirectEarnings += earning;
             }
-            indirectCount += indirects.length;
         }
+
+        indirectCount += indirects.length;
     }
 
     const totalEarnings = directEarnings + indirectEarnings;
@@ -378,21 +411,32 @@ async function loadDashboard() {
 
     hideLoading();
 
+    document.getElementById("plan-name").textContent = userPlan || "Not Set";
+    document.getElementById("sidebar-plan").textContent = userPlan || "Not Set";
+
     const totalInvitesEl = document.getElementById("total-invites");
-    if (totalInvitesEl) animateCounter(totalInvitesEl, directCount + indirectCount);
+    if (totalInvitesEl) {
+        animateCounter(totalInvitesEl, directCount + indirectCount);
+    }
 
     const walletBalanceEl = document.getElementById("wallet-balance");
     if (walletBalanceEl) {
         const amountSpan = walletBalanceEl.querySelector('.amount');
-        if (amountSpan) animateCounter(amountSpan, profile.wallet_balance);
-        else walletBalanceEl.textContent = `PKR ${profile.wallet_balance.toLocaleString()}`;
+        if (amountSpan) {
+            animateCounter(amountSpan, profile.wallet_balance);
+        } else {
+            walletBalanceEl.textContent = `PKR ${profile.wallet_balance.toLocaleString()}`;
+        }
     }
 
     const totalEarningsEl = document.getElementById("total-earnings");
     if (totalEarningsEl) {
         const amountSpan = totalEarningsEl.querySelector('.amount');
-        if (amountSpan) animateCounter(amountSpan, totalEarnings);
-        else totalEarningsEl.textContent = `PKR ${totalEarnings.toLocaleString()}`;
+        if (amountSpan) {
+            animateCounter(amountSpan, totalEarnings);
+        } else {
+            totalEarningsEl.textContent = `PKR ${totalEarnings.toLocaleString()}`;
+        }
     }
 
     const directElem = document.getElementById("direct-invites");
@@ -402,30 +446,20 @@ async function loadDashboard() {
     if (indirectElem) indirectElem.textContent = `Team: ${indirectCount}`;
 
     const directEarningsValueEl = document.getElementById("direct-earnings-value");
-    if (directEarningsValueEl) directEarningsValueEl.textContent = `PKR ${directEarnings.toLocaleString()}`;
+    if (directEarningsValueEl) {
+        directEarningsValueEl.textContent = `PKR ${directEarnings.toLocaleString()}`;
+    }
 
     const indirectEarningsValueEl = document.getElementById("indirect-earnings-value");
-    if (indirectEarningsValueEl) indirectEarningsValueEl.textContent = `PKR ${indirectEarnings.toLocaleString()}`;
+    if (indirectEarningsValueEl) {
+        indirectEarningsValueEl.textContent = `PKR ${indirectEarnings.toLocaleString()}`;
+    }
 
-    setTimeout(() => drawEarningsChart(directEarnings, indirectEarnings), 500);
-    window.addEventListener('resize', () => drawEarningsChart(directEarnings, indirectEarnings));
-}
+    setTimeout(() => {
+        drawEarningsChart(directEarnings, indirectEarnings);
+    }, 500);
 
-document.addEventListener("DOMContentLoaded", async () => {
-    initTheme();
-    initSidebar();
-    initDropdowns();
-    initCursorGlow();
-    initScrollAnimations();
-
-    const themeToggle = document.getElementById('themeToggle');
-    if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
-
-    const logoutBtn = document.getElementById('logoutBtn');
-    if (logoutBtn) logoutBtn.addEventListener('click', handleLogout);
-
-    const currentYearEl = document.getElementById('currentYear');
-    if (currentYearEl) currentYearEl.textContent = new Date().getFullYear();
-
-    await loadDashboard();
+    window.addEventListener('resize', () => {
+        drawEarningsChart(directEarnings, indirectEarnings);
+    });
 });
