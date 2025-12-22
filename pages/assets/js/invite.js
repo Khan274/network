@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const { data: profile, error: profileError } = await supabaseClient
     .from("profiles")
     .select("referral_code")
-    .eq("id", userId)
+    //.eq("id", userId)
     .single();
 
   if (profileError || !profile) {
